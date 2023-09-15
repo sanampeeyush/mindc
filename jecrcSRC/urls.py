@@ -15,8 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.models import Group
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path('admin/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path("admin/", admin.site.urls), # jecrc | Jecrc@123?
+    path("", include('mind_charger.urls'))
 ]
+
+admin.site.site_header = 'Mind Charger'
+admin.site.site_title = 'Admin'
+admin.site.index_title = 'Mind Charger'
+admin.site.unregister(Group)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
