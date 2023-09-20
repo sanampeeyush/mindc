@@ -19,27 +19,26 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="/create" class="nav-link" aria-current="page">Create</a></li>
+                <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Home</a></li>
+                <li class="nav-item"><a href="/create" class="nav-link active" aria-current="page">Create</a></li>
                 <li class="nav-item"><a href="/admin" class="nav-link">Admin</a></li>
             </ul>
         </header>
     </div>
 
 
-    <div class="container col-xxl-8 px-4 py-5">
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-            <div class="col-10 col-sm-8 col-lg-6">
-                <img src={% static 'images/mind_charger.jpeg' %} class="d-block mx-lg-auto img-fluid" alt="Mind Charger" width="700"
-                    height="500" loading="lazy">
-            </div>
-            <div class="col-lg-6">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Mind Charger</h1>
-                <p class="lead">Ignite your inner light and elevate your consciousness with this innovative device, 
-                    designed to enhance spiritual well-being and promote mental clarity.</p>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <a href="admin/"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Admin</button></a>
-                </div>
+    
+    <div class="container m-auto">
+        <div class="card m-auto" style="width: 15rem;">
+            <div class="card-header">Connect to Mind Charger</div>
+            <div class="card-body">
+                <form class="form" role="form" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-warning">Submit</button>
+                    <hr>
+                    <a href="/">Back</a>
+                </form>
             </div>
         </div>
     </div>
@@ -56,3 +55,4 @@
 </body>
 
 </html>
+    

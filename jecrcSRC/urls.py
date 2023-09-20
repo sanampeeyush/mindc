@@ -25,7 +25,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path("admin/", admin.site.urls), # jecrc | Jecrc@123?
-    path("", include('mind_charger.urls'))
+    path("", include('mind_charger.urls')),
+    path("", include('basicuser.urls')),
 ]
 
 admin.site.site_header = 'Mind Charger'

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "mind_charger",    
+    "mind_charger",
+    "basicuser",   
 ]
 
 MIDDLEWARE = [
