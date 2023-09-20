@@ -3,9 +3,16 @@ from django.http import JsonResponse
 from . import models
 # Create your views here.
 
-from .forms import SSIDDataForm
+from .forms import SSIDDataForm, MacForm
 
-
+def update_ssid_data_by_mac_form_view(request):
+    form = MacForm()
+    if request.method == 'POST':
+        form = MacForm(request.POST)
+        if form.is_valid():
+            mac = form.cleaned_data.get('mac')
+            return redirect('update-ssid-data-by-mac', mac = mac)
+    return render(request, 'basicuser/create_ssid_data_using_mac.html',{'form': form,})
 
 def update_ssid_data_by_mac(request, mac):
     ssid_data = get_object_or_404(models.SSIDData, mac=mac)
@@ -18,7 +25,7 @@ def update_ssid_data_by_mac(request, mac):
     else:
         form = SSIDDataForm(instance=ssid_data)
     
-    return render(request, 'update_ssid_data.html', {'form': form, 'ssid_data': ssid_data})
+    return render(request, 'basicuser/update_ssid_data.html', {'form': form, 'ssid_data': ssid_data})
 
 def create_ssid_data(request):
     if request.method == 'POST':
