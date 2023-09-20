@@ -1,9 +1,24 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from . import models
 # Create your views here.
 
 from .forms import SSIDDataForm
+
+
+
+def update_ssid_data_by_mac(request, mac):
+    ssid_data = get_object_or_404(models.SSIDData, mac=mac)
+    
+    if request.method == 'POST':
+        form = SSIDDataForm(request.POST, instance=ssid_data)
+        if form.is_valid():
+            form.save()
+            return redirect('home_page')  # Redirect to a success page after form submission
+    else:
+        form = SSIDDataForm(instance=ssid_data)
+    
+    return render(request, 'update_ssid_data.html', {'form': form, 'ssid_data': ssid_data})
 
 def create_ssid_data(request):
     if request.method == 'POST':
